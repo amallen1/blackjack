@@ -1,9 +1,10 @@
 let cardsEl = document.getElementById("cards");
 let total = document.getElementById("total");
 let messageEl = document.getElementById("message-el");
+let newCardBtn = document.getElementById("card-btn");
+let points = document.getElementById('pts')
 
-let newCardBtn = document.getElementById('card-btn');
-//console.log(newCardBtn)
+let count = 0;
 
 const MAX = 10;
 const MIN = 1;
@@ -15,13 +16,13 @@ let message = "";
 let cards = [];
 
 let winSound = new Audio();
-winSound.src= "/sounds/win.mp3";
+winSound.src = "/sounds/win.mp3";
 
 let loseSound = new Audio();
-loseSound.src = "/sounds/lose.mp3"
+loseSound.src = "/sounds/lose.mp3";
 
 let win1 = new Audio();
-win1.src = "/sounds/winwin.mp3"
+win1.src = "/sounds/winwin.mp3";
 
 function getRandomInt() {
   return Math.floor(Math.random() * (MAX - MIN) + MIN);
@@ -38,9 +39,9 @@ function start() {
   total.innerText = "Total: " + sum;
 }
 
-newCardBtn.addEventListener('click', function(){
+newCardBtn.addEventListener("click", function () {
   getNewCard();
-})
+});
 
 function getNewCard() {
   if (isAlive && hasBlackJack === false) {
@@ -54,9 +55,10 @@ function getNewCard() {
     } else if (sum === 21) {
       message = "You win!";
       hasBlackJack = true;
-      win1.play()
+      win1.play();
+      addPoint();
     } else {
-      loseSound.play()
+      loseSound.play();
       message = "You lose!";
       isAlive = false;
     }
@@ -64,3 +66,7 @@ function getNewCard() {
   }
 }
 
+function addPoint(){
+    count += 1;
+    points.innerText = "Points: " + count;
+}
